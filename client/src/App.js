@@ -4,6 +4,7 @@ import Navbar from "./navbar"; // Ensure the path is correct
 import MainContent from "./MainContent";
 import FinancialDashboard from "./financialDashboard";
 import Stocks from "./Stocks";
+import StockPlot from "./StockPlot";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min";
 
@@ -35,12 +36,7 @@ function App() {
         <h1>Stock Forecast</h1>
         <Stocks onForecastData={handleForecastData}/>
         {error && <p>Error: {error}</p>}
-        {forecastData && (
-          <div>
-            {/* Render the forecast data */}
-            <pre>{JSON.stringify(forecastData, null, 2)}</pre>
-          </div>
-        )}
+        {forecastData && <StockPlot data={forecastData} />}
       </div>
     </div>
   );

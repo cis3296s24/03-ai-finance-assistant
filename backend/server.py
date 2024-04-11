@@ -77,8 +77,9 @@ def get_stock():
     m.fit(df_train)
     future = m.make_future_dataframe(periods=period)
     forecast = m.predict(future)
-    # fig1 = plot_plotly(m, forecast)
-    return jsonify(forecast.to_dict(orient='records'))
+    fig1 = plot_plotly(m, forecast)
+    graph_json = fig1.to_json()
+    return app.response_class(graph_json, content_type='application/json')
 
     
 
