@@ -14,16 +14,20 @@ function App() {
     setIsLoggedIn(loginStatus);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <Router>
       <div>
         {isLoggedIn ? (
           <>
-            <Navbar />
+            <Navbar onLogout={handleLogout} />
             <Routes>
               <Route path="/stocks" element={<StockPage />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/logout" element={<LoginPage />} />
+              <Route path="/logout" element={<LandingPage />} />
               {/* Default path goes to home page  */}
               <Route path="/" element={<Home />} />
             </Routes>

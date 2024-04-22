@@ -14,9 +14,9 @@ function Home() {
     <div>
       <IncomeForm />
       <FinancialDashboard />
-        <DataFetcher onDataFetched={setTransactionData} />
-        <PieChartDisplay data={transactionData} />
-        <BarChartDisplay/>
+      <DataFetcher onDataFetched={setTransactionData} />
+      <PieChartDisplay data={transactionData} />
+      <BarChartDisplay />
     </div>
   );
 }
