@@ -16,10 +16,10 @@ function Navbar({ onLogout }) {
   };
 
   const navBarStyle = {
-    padding: '50px 0', 
-    backgroundColor: '#4CAF50', 
-    textAlign: 'center',
-    borderRadius: '0.375rem',
+    padding: "50px 0",
+    backgroundColor: "#4CAF50",
+    textAlign: "center",
+    borderRadius: "0.375rem",
   };
 
   return (
@@ -45,14 +45,14 @@ function Navbar({ onLogout }) {
         {/* <a href="#news" style={linkStyle}>News</a> */}
         {/* <a href="#contact" style={linkStyle}>Contact</a> */}
         {/* <a href="#about" style={linkStyle}>About</a> */}
+        <Link to="/stocks" style={linkStyle}>
+          Stocks
+        </Link>
         <div onClick={handleLogout} style={{ display: "inline" }}>
           <Link to="/landing" style={linkStyle}>
             Logout
           </Link>
         </div>
-        <Link to="/stocks" style={linkStyle}>
-          Stocks
-        </Link>
       </nav>
     </>
   );
