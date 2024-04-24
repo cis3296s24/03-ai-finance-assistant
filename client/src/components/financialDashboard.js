@@ -84,8 +84,6 @@ function FinancialDashboard() {
               onChange={(e) => handleDocumentTypeChange(index, e.target.value)}
             >
               <option value="statement">Statement</option>
-              <option value="income">Income</option>
-              <option value="cashSpending">Cash Spending</option>
             </select>
 
             {line.documentType === 'statement' && (
@@ -113,24 +111,6 @@ function FinancialDashboard() {
               </>
             )}
 
-            {(line.documentType === 'income' || line.documentType === 'cashSpending') && (
-              <>
-                <input
-                  type="number"
-                  placeholder="Amount"
-                  value={line.amount}
-                  onChange={(e) => handleFieldChange(index, 'amount', e.target.value)}
-                />
-                <input
-                  type="date"
-                  placeholder="Date"
-                  value={line.date}
-                  onChange={(e) => handleFieldChange(index, 'date', e.target.value)}
-                />
-                <button class="button2" onClick={() => handleFileUpload(index)}>Upload Data</button>
-              </>
-            )}
-            
           </div>
         ))}
         <button class="button" onClick={addUploadLine}>Add Another Document</button>
