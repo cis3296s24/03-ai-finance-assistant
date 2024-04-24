@@ -2,8 +2,6 @@
 
 from config import db
 
-
-
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80), unique=False, nullable=False)
@@ -21,3 +19,24 @@ class Contact(db.Model):
             "password": self.password,
         }
 
+
+class Finances(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+   # contact_id = db.Column(db.Integer, db.ForeignKey('contact.id'), nullable=False)
+    month = db.Column(db.String(2), nullable=False)
+    date = db.Column(db.String(8), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    category = db.Column(db.String(50), nullable=False)
+
+    #one to many (one contact linked to many finances)
+   # contact = db.relationship('Contact', backref=db.backref('finances', lazy=True))
+
+    def to_json(self):
+        return {
+            "id": self.id,
+         #   "contact_id": self.contact_id,
+            "Month": self.month,
+            "Date": self.date,
+            "Amount": self.amount,
+            "Category": self.category,
+        }

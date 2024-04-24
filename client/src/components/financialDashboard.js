@@ -4,6 +4,9 @@ import './financialDashboard.css'; // Ensure this points to the actual CSS file 
 
 function FinancialDashboard() {
   const [documentLines, setDocumentLines] = useState([createNewLine('statement')]);
+  // we will keep track of the uploads done by the user.
+  const [successfulUploads, setSuccessfulUploads] = useState(0); 
+
 
   function createNewLine(documentType) {
     return {
@@ -61,9 +64,22 @@ function FinancialDashboard() {
       });
       console.log(response.data);
       alert("Data uploaded successfully");
+      // icrementing success count
+      setSuccessfulUploads(prevCount => prevCount + 1)
     } catch (error) {
       console.error("Error uploading data: ", error);
       alert("Error uploading data");
+    }
+  };
+
+  const handleFinalSubmit = async () => {
+    try {
+      const response = await axios.post('/final-submit', { message: 'Upload complete' });
+      console.log(response.data);
+      alert("All documents have been successfully submitted.");
+    } catch (error) {
+      console.error("Error on final submission: ", error);
+      alert("Error on final submission");
     }
   };
 
@@ -113,10 +129,13 @@ function FinancialDashboard() {
 
           </div>
         ))}
-        <button class="button" onClick={addUploadLine}>Add Another Document</button>
+        <button onClick={addUploadLine}>Add Another Document</button>
+        {successfulUploads >= 5 && (
+          <button onClick={handleFinalSubmit}>Submit All Documents</button>
+        )}
       </main>
       <footer>
-        <p>&copy; 2024 Your Company Name</p>
+        {/* <p>&copy; 2024 MoneyTree</p> */}
       </footer>
     </div>
   );

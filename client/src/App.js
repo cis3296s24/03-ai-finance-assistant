@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import StockPage from "./pages/StockPage.js";
 import Home from "./pages/Home.js";
 import LandingPage from "./pages/LandingPage.js";
+import CurrentFinancialInformation from "./components/CurrentFinancialInformation.js";
+import FinancialAdvice from "./components/FinancialAdvice.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,7 +29,9 @@ function App() {
             <Routes>
               <Route path="/stocks" element={<StockPage />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/logout" element={<LandingPage />} />
+              <Route path="/logout" element={<LoginPage />} />
+              <Route path="/Current Financial Information" element={<CurrentFinancialInformation />} />
+              <Route path="/Financial Advice" element = {<FinancialAdvice/>} />
               {/* Default path goes to home page  */}
               <Route path="/" element={<Home />} />
             </Routes>
