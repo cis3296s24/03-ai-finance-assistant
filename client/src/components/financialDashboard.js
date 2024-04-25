@@ -84,7 +84,7 @@ function FinancialDashboard() {
       });
       console.log(response.data);
       alert("All documents have been successfully submitted.");
-      navigate("/Financial Advice");
+      navigate("/Current Financial Information");
     } catch (error) {
       console.error("Error on final submission: ", error);
       alert("Error on final submission");
