@@ -119,20 +119,21 @@ def get_stock():
 @app.route('/get_transaction_data', methods=["GET"])
 def getTransactionData():
     """
-    1) This function waits until there is a transactions.csv file available. 
-    2) Once the file is available we retreive the data for each month and then sum up the distinct
+    This function waits until there is a transactions.csv file available. 
+
+    Once the file is available we retreive the data for each month and then sum up the distinct
     category for each month
-    3) result is a dictionary with key as month and value as an array of each category and their 
+
+    Result is a dictionary with key as month and value as an array of each category and their 
     summed amount for each month.
     
-
     :return: JSON dictionary with the status of the dictionary. 
     """
-    while not os.path.exists("Your path to transactions.csv in the UPLOAD_FOLDER"):
+    while not os.path.exists("/Users/nickpelletier/repos/softwareDesignClass/03-ai-finance-assistant/backend/UPLOAD_FOLDER/transactions.csv"):
         print("Waiting for the csv file")
         time.sleep(10)
     
-    df = pd.read_csv("Your path to transactions.csv in the UPLOAD_FOLDER")
+    df = pd.read_csv("/Users/nickpelletier/repos/softwareDesignClass/03-ai-finance-assistant/backend/UPLOAD_FOLDER/transactions.csv")
     groupedElements = df.groupby(["Month", "Category"])["Amount"].sum().unstack(fill_value=0).stack().reset_index(name="Amount")
     #print(groupedElements)
     result = groupedElements.groupby("Month").apply(lambda x: x[["Category", "Amount"]].to_dict('records')).to_dict()
@@ -167,7 +168,7 @@ def createTheCSVFile():
     
     :return: JSON message if the data retrevial was succesful with status
     """
-    dir = "Your path to UPLOAD_FOLDER"
+    dir = "/Users/nickpelletier/repos/softwareDesignClass/03-ai-finance-assistant/backend/UPLOAD_FOLDER"
     response = {}
     for filename in os.listdir(dir):
         if filename.lower().endswith(".pdf"):
@@ -213,7 +214,7 @@ def addMatchesToCsvFile(filename, matches, dateMatches):
     :param c: This is the date matches from the PDF file
     :return: JSON dictionary with the status of the dictionary. 
     """
-    dir = "Your path to UPLOAD_FOLDER"
+    dir = "/Users/nickpelletier/repos/softwareDesignClass/03-ai-finance-assistant/backend/UPLOAD_FOLDER"
     if not os.path.exists(dir):
         os.makedirs(dir)
     
@@ -278,7 +279,7 @@ def getPredictedData():
     
     :return: JSON dictionary of each category and the amount spend for that category
     """
-    df = pd.read_csv("Your path to transactions.csv")
+    df = pd.read_csv("/Users/nickpelletier/repos/softwareDesignClass/03-ai-finance-assistant/backend/UPLOAD_FOLDER/transactions.csv")
 
     dummies = pd.get_dummies(df['Category'])
     df = pd.concat([df, dummies], axis=1)
@@ -532,22 +533,6 @@ def process_finances():
     else:
         return jsonify({"error": "CSV file not found"}), 404
     
-
-
-@app.route('/loginpage', methods=['POST'])
-def login():
-    email = request.json.get('email', None)
-    password = request.json.get('password', None)
-
-    contact = Contact.query.filter_by(email=email).first()
-    
-    if contact and contact.password == password:
-        return jsonify({"message": "Login successful"}), 200
-    
-    return jsonify({"message": "Wrong email or password"}), 401
-
-
-
 
 
 if __name__ == '__main__':

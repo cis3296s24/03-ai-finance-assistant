@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>server module &#8212; AI Finance Assistant Money Tree  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="transaction module" href="transaction.html" />
+    <link rel="prev" title="models module" href="models.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-server">
+<span id="server-module"></span><h1>server module<a class="headerlink" href="#module-server" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="server.addMatchesToCsvFile">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">addMatchesToCsvFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matches</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dateMatches</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#server.addMatchesToCsvFile" title="Link to this definition">¶</a></dt>
+<dd><ol class="arabic simple">
+<li><p>This function creates the CSV file</p></li>
+<li><p>First it creates the transactions.csv in the UPLOAD_FOLDER if it does not exist.</p></li>
+<li><p>Next it creates a header if it does not exist</p></li>
+<li><p>Lastly it just appends the data from the regex pattern matches.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – The filename is important as we need to get the month data.</p></li>
+<li><p><strong>b</strong> – This is the matches from the PDF file.</p></li>
+<li><p><strong>c</strong> – This is the date matches from the PDF file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON dictionary with the status of the dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.createTheCSVFile">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">createTheCSVFile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.createTheCSVFile" title="Link to this definition">¶</a></dt>
+<dd><ol class="arabic simple">
+<li><p>This function loops through all the files in the UPLOAD_FOLDER.</p></li>
+<li><p>Once there is a file it extracts text from the pdf.</p></li>
+<li><p>The pdf text then follows a regex pattern and we get the text we need from the PDF like dates, amount and category.</p></li>
+<li><p>Once there are matches found we push this data into a CSV file.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON message if the data retrevial was succesful with status</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.create_contact">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">create_contact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.create_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new contact using JSON data and add it to the database.
+Checks if the email already exists in the database to prevent duplicates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON response with either a success or error message and the appropriate status code</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.csv_to_db">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">csv_to_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#server.csv_to_db" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.customizeCategory">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">customizeCategory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#server.customizeCategory" title="Link to this definition">¶</a></dt>
+<dd><p>Just changing the category in case of any external string added to the file. 
+:param a: category, each category is tested to make sure we provide the most accurate category to the user.
+:return: category which is the fixed string of the category</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.delete_contact">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">delete_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#server.delete_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Delete a contact identified by user_id from  database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> (<em>int</em>) – ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON response with a success or error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.extractTextFromPDF">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">extractTextFromPDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdf_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#server.extractTextFromPDF" title="Link to this definition">¶</a></dt>
+<dd><ol class="arabic simple">
+<li><p>This function uses the PdfReader and reads the pdf data from each page of the file.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>returning a string with all the text from the file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.getMonth">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">getMonth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#server.getMonth" title="Link to this definition">¶</a></dt>
+<dd><ol class="arabic simple">
+<li><p>This function given the file name returns the month.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int with the corresponding month.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.getPredictedData">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">getPredictedData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.getPredictedData" title="Link to this definition">¶</a></dt>
+<dd><ol class="arabic simple">
+<li><p>This function predicts user’s transaction for the next month.</p></li>
+<li><p>It uses a linear regression ML model for the predicition.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON dictionary of each category and the amount spend for that category</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.getTransactionData">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">getTransactionData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.getTransactionData" title="Link to this definition">¶</a></dt>
+<dd><p>This function waits until there is a transactions.csv file available.</p>
+<p>Once the file is available we retreive the data for each month and then sum up the distinct
+category for each month</p>
+<p>Result is a dictionary with key as month and value as an array of each category and their 
+summed amount for each month.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON dictionary with the status of the dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.getUserIncome">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">getUserIncome</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.getUserIncome" title="Link to this definition">¶</a></dt>
+<dd><ol class="arabic simple">
+<li><p>Gets the income from the user a POST request.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON dict with success message and monthly_income from the user.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.get_contacts">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">get_contacts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.get_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve all contacts from database and return them as JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON object containing a list of contacts</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.get_data">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.get_data" title="Link to this definition">¶</a></dt>
+<dd><p>Simple test function
+1) If the request is GET then send a sample test 
+2) If request is POST then retrevive the data 
+:return: JSON dictionary and status of the result.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.get_stock">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">get_stock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.get_stock" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves stock data and makes prediction on future stock prices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – a stock ticker</p></li>
+<li><p><strong>b</strong> – number of years of predicton</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON with graph of stock prediction, the current price, and the latest prediction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.login">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.login" title="Link to this definition">¶</a></dt>
+<dd><p>Handle  login by verifying email and password with values in  database.
+Returns a success message if user exists, otherwise returns an error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON response of the result of the login attempt.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.process_finances">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">process_finances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.process_finances" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.update_contact">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">update_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#server.update_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Update an existing contact identified by user_id with data from JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> (<em>int</em>) – ID of the contact to be updated</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON with a success or error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="server.upload_file">
+<span class="sig-prename descclassname"><span class="pre">server.</span></span><span class="sig-name descname"><span class="pre">upload_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#server.upload_file" title="Link to this definition">¶</a></dt>
+<dd><p>gets the file from frontend and saves it in UPLOAD FOLDER. 
+1) checks for condition if no file gets uploaded gives a 400 error. 
+2) if file’s name is an empty string returns a 400 error
+3) If it is a proper file, then it it saves the file in the UPLOAD_FOLDER by creating a path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON and status of the result.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">AI Finance Assistant Money Tree</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">backend</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linearRegression.html">linearRegression module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transaction.html">transaction module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">backend</a><ul>
+      <li>Previous: <a href="models.html" title="previous chapter">models module</a></li>
+      <li>Next: <a href="transaction.html" title="next chapter">transaction module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Nick Pelletier, Trevor Flick, Leili Zadeh, Nate Hedrick.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/server.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
